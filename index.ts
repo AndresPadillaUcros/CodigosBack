@@ -3,15 +3,15 @@ import Cors from 'cors';
 import dotenv from 'dotenv';
 import {conectarBD} from './db/db';
 import {ApolloServer} from 'apollo-server-express';
-import {typeDefs} from './graphql/tipos'
+import {tipos} from './graphql/tipos'
 import {resolvers} from './graphql/resolvers'
 
 dotenv.config();
 
-/* const server= new ApolloServer({ 
-    typeDefs:typeDefs,
+const server= new ApolloServer({ 
+    typeDefs:tipos,
     resolvers:resolvers,
-}) */
+}) 
 
 const app= Express();
 
@@ -22,8 +22,8 @@ app.use(Cors());
 
 app.listen({port:process.env.PORT || 4000},async()=>{
     await conectarBD();
-    /* await server.start();  /* prender el servidor de apolo */ 
+    await server.start();  
 
-    /* server.applyMiddleware({ app }); /* agregar Middleware adicionales */ 
+    server.applyMiddleware({ app }); /* agregar Middleware adicionales  */
     console.log("servidor listo")
 })

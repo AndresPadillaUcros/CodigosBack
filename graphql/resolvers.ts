@@ -1,6 +1,4 @@
-const resolvers={
 
+import { resolversPython } from "../models/python/resolvers"
 
-}
-
-export {resolvers}
+export const resolvers=[resolversPython]

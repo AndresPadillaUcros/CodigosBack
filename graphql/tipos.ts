@@ -1,7 +1,8 @@
 import { gql } from "apollo-server-express";
+import { tiposPython } from "../models/python/tipos";
 
-const typeDefs=gql`  
-  
-`
+const tiposGlobales= gql`
+    scalar Date
+`;
 
-export {typeDefs}
+export const tipos=[tiposGlobales,tiposPython] 
