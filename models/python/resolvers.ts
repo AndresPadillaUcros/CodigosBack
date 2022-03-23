@@ -3,7 +3,7 @@ import { PythonModel } from "./python";
 const resolversPython ={
 
     Query:{
-        Codigos: async (parent,args)=>{
+        getCodigos: async (parent,args)=>{
             const codigos=await PythonModel.find()
             return codigos;
         }

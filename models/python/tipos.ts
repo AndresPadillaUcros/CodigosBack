@@ -9,7 +9,7 @@ const tiposPython= gql`
         codigo:String!
     }
     type Query{
-        Codigos:[Python_Codigo]         
+        getCodigos:[Python_Codigo]         
     }
     
     """ Codigos es el nombre que se le asigna a la query, asi debe ir en Query en el file resolvers.ts """
