@@ -4,7 +4,7 @@ const resolversPython ={
 
     Query:{
         getCodigos: async (parent,args)=>{
-            const codigos=await PythonModel.find()
+            const codigos=await PythonModel.find({...args.filtro})
             return codigos;
         }
     },
