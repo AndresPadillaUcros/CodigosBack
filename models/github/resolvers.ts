@@ -1,19 +1,17 @@
-import { PythonModel } from "./python";
+import { GithubModel } from "./github";
 
-const resolversPython ={
+const resolversGithub ={
 
     Query:{
-        getCodigos: async (parent,args)=>{
-            const codigos=await PythonModel.find({...args.filtro})
+        getCodigosGithub: async (parent,args)=>{
+            const codigos=await GithubModel.find()
             return codigos;
         }
     },
         
     Mutation:{
-        crearCodigo:async(parent,args)=>{
-            const codigoCreado=await PythonModel.create({
-                clave:args.clave,
-                tipo:args.tipo,
+        crearCodigoGithub:async(parent,args)=>{
+            const codigoCreado=await GithubModel.create({
                 descripcion:args.descripcion,
                 codigo:args.codigo,
                 }   
@@ -21,9 +19,9 @@ const resolversPython ={
             return  codigoCreado;
         },
         
-        eliminarCodigo: async(parent,args)=>{
+        eliminarCodigoGithub: async(parent,args)=>{
             if(Object.keys(args).includes('_id')){
-                const codigoEliminado=PythonModel.findOneAndDelete
+                const codigoEliminado=GithubModel.findOneAndDelete
                     ({
                     _id:args._id
                     });
@@ -31,10 +29,8 @@ const resolversPython ={
             }  
         },
            
-        editarCodigo:  async(parent,args)=>{
-            const codigoEditado= await PythonModel.findByIdAndUpdate(args._id,{
-                clave:args.clave,
-                tipo:args.tipo,
+        editarCodigoGithub:  async(parent,args)=>{
+            const codigoEditado= await GithubModel.findByIdAndUpdate(args._id,{
                 descripcion:args.descripcion,
                 codigo:args.codigo,        
             },
@@ -46,4 +42,4 @@ const resolversPython ={
     }
 }
 
-export {resolversPython};
+export {resolversGithub};

@@ -5,6 +5,7 @@ const tiposPython= gql`
     type Python_Codigo{
         _id:ID!
         clave:Enum_Clave!
+        tipo: String!
         descripcion:String
         codigo:String!
     }
@@ -23,6 +24,7 @@ const tiposPython= gql`
 
         crearCodigo(
             clave:Enum_Clave!
+            tipo:String
             descripcion:String
             codigo:String!
         ):Python_Codigo
@@ -34,6 +36,7 @@ const tiposPython= gql`
         editarCodigo(
             _id:String!
             clave:Enum_Clave!
+            tipo:String
             descripcion:String
             codigo:String!
         ):Python_Codigo

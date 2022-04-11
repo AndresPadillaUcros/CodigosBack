@@ -4,6 +4,7 @@ import {Enum_Clave} from "../enums/enums"
 
 interface python{
     clave:Enum_Clave,
+    tipo:string,
     descripcion: string,
     codigo: string
 }
@@ -13,6 +14,9 @@ const pythonSchema = new Schema<python>({
         type:String,
         enum:Enum_Clave,
         required:true,
+    },
+    tipo:{
+        type:String,
     },
     descripcion:{
         type:String,
