@@ -1,4 +1,5 @@
 import { PythonModel } from "./python";
+import { AuthenticationError } from 'apollo-server'
 
 const resolversPython ={
 
@@ -21,26 +22,37 @@ const resolversPython ={
             return  codigoCreado;
         },
         
-        eliminarCodigo: async(parent,args)=>{
-            if(Object.keys(args).includes('_id')){
-                const codigoEliminado=PythonModel.findOneAndDelete
-                    ({
-                    _id:args._id
-                    });
-                return codigoEliminado;
-            }  
+        eliminarCodigo: async(parent,args,context)=>{
+            if (context.password===process.env.PASSWORD ){
+                console.log("la contraseña es correcta")
+                if(Object.keys(args).includes('_id')){
+                    const codigoEliminado=PythonModel.findOneAndDelete
+                        ({
+                        _id:args._id
+                        });
+                    return codigoEliminado;
+                }  
+            }
         },
            
-        editarCodigo:  async(parent,args)=>{
-            const codigoEditado= await PythonModel.findByIdAndUpdate(args._id,{
-                clave:args.clave,
-                tipo:args.tipo,
-                descripcion:args.descripcion,
-                codigo:args.codigo,        
-            },
-                {new:true}  
-            );
-            return codigoEditado;     
+        editarCodigo:  async(parent,args,context)=>{
+
+                console.log("la contraseña es:",context)
+                if (context.password===process.env.PASSWORD ){
+                    console.log("la contraseña es correcta")
+                    const codigoEditado= await PythonModel.findByIdAndUpdate(args._id,{
+                        clave:args.clave,
+                        tipo:args.tipo,
+                        descripcion:args.descripcion,
+                        codigo:args.codigo,        
+                    },
+                        {new:true}  
+                    );
+                    return codigoEditado;     
+                } else{
+                    throw new AuthenticationError('You must be logged in');
+                }
+   
         },
         
     }
